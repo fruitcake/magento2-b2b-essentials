@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <fruitcake_b2b_essentials>
+            <customer>
+                <disable_registration>0</disable_registration>
+            </customer>
+        </fruitcake_b2b_essentials>
+    </default>
+</config>
