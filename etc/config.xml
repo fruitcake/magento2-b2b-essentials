@@ -5,6 +5,9 @@
             <customer>
                 <disable_registration>0</disable_registration>
             </customer>
+            <catalog>
+                <disable_guest_addtocart>0</disable_guest_addtocart>
+            </catalog>
         </fruitcake_b2b_essentials>
     </default>
 </config>

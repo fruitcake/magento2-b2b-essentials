@@ -16,10 +16,10 @@ You can enable/disable plugins in the Fruitcake B2B tab.
 ## Available plugins
  
  - Disable front-end registration
+ - Disable Add To Cart for guests
  
 ## Todo / future ideas
 
- - Disable add to cart for guests
  - Hide price for guests
  - ..
  

@@ -1,8 +1,14 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
     <type name="Magento\Customer\Model\Registration">
         <plugin name="fruitcake_b2b_essentials_disable_registrations"
                 type="Fruitcake\B2BEssentials\Plugin\DisableRegistration"/>
+    </type>
+
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="fruitcake_b2b_essentials_disable_addtocart"
+                type="Fruitcake\B2BEssentials\Plugin\DisableAddToCart"/>
     </type>
 </config>
