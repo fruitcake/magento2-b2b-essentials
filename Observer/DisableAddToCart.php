@@ -1,9 +1,11 @@
 <?php
 
-namespace Fruitcake\B2BEssentials\Plugin;
+namespace Fruitcake\B2BEssentials\Observer;
 
 use Fruitcake\B2BEssentials\Helper\Data;
 use Magento\Catalog\Model\Product;
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Exception\LocalizedException;
 
 class DisableAddToCart
 {
@@ -17,16 +19,14 @@ class DisableAddToCart
     }
 
     /**
-     * Check is product available for sale
+     * Check is product can be added to the quote
      *
      * @return bool
      */
-    public function aroundIsSalable(Product $subject, callable $proceed)
+    public function execute(Observer $observer)
     {
         if ($this->helper->getConfig('catalog/disable_guest_addtocart') && !$this->helper->isLoggedIn()) {
-            return false;
+            throw new LocalizedException(__('Please login to add products to your cart.'));
         }
-
-        return $proceed();
     }
 }
