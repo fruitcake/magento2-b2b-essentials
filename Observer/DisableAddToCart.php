@@ -3,11 +3,11 @@
 namespace Fruitcake\B2BEssentials\Observer;
 
 use Fruitcake\B2BEssentials\Helper\Data;
-use Magento\Catalog\Model\Product;
 use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\LocalizedException;
 
-class DisableAddToCart
+class DisableAddToCart implements ObserverInterface
 {
 
     /** @var $helper */
