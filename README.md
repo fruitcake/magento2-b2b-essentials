@@ -13,14 +13,14 @@ php bin/magento setup:upgrade
 
 You can enable/disable plugins in the Fruitcake B2B tab.
 
-## Available plugins
+## Available features
  
  - Disable front-end registration
  - Disable Add To Cart for guests
+ - Hide Price for guest users
  
 ## Todo / future ideas
 
- - Hide price for guests
  - ..
  
 ## License

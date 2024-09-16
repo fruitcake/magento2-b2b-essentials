@@ -3,4 +3,11 @@
     <event name="sales_quote_product_add_after">
         <observer name="fruitcake_b2b_essentials_disable_addtocart" instance="Fruitcake\B2BEssentials\Observer\DisableAddToCart"/>
     </event>
+    <event name="catalog_product_load_after">
+        <observer name="fruitcake_b2b_essentials_product_after" instance="Fruitcake\B2BEssentials\Observer\ProductObserver" />
+    </event>
+    <event name="catalog_product_collection_load_after">
+        <observer name="fruitcake_b2b_essentials_product_collection_after" instance="Fruitcake\B2BEssentials\Observer\ProductCollectionObserver" />
+    </event>
+
 </config>

@@ -7,6 +7,7 @@
             </customer>
             <catalog>
                 <disable_guest_addtocart>0</disable_guest_addtocart>
+                <disable_guest_prices>0</disable_guest_prices>
             </catalog>
         </fruitcake_b2b_essentials>
     </default>
