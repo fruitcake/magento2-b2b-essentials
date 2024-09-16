@@ -6,13 +6,10 @@
         <plugin name="fruitcake_b2b_essentials_disable_registrations"
                 type="Fruitcake\B2BEssentials\Plugin\DisableRegistration"/>
     </type>
+
     <type name="Magento\Webapi\Model\Config\Converter">
         <plugin name="fruitcake_b2b_essentials_disable_webapi_registration"
                 type="Fruitcake\B2BEssentials\Plugin\DisableAnonymousCustomerRegistration" />
     </type>
 
-    <type name="Magento\Catalog\Block\Product\View">
-        <plugin name="fruitcake_b2b_essentials_hide_addtocart"
-                type="Fruitcake\B2BEssentials\Plugin\HideAddToCart"/>
-    </type>
 </config>
