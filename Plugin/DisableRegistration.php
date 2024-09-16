@@ -5,14 +5,10 @@ namespace Fruitcake\B2BEssentials\Plugin;
 use Fruitcake\B2BEssentials\Helper\Data;
 use Magento\Customer\Model\Registration;
 
-class DisableRegistration {
-
-    /** @var $helper */
-    private $helper;
-
-    public function __construct(Data $helper)
+class DisableRegistration
+{
+    public function __construct(private Data $helper)
     {
-        $this->helper = $helper;
     }
 
     /**

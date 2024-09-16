@@ -12,18 +12,14 @@ use Magento\Webapi\Model\Config\Converter;
  *
  * @see \Magento\WebapiSecurity\Model\Plugin\AnonymousResourceSecurity
  */
-class DisableAnonymousCustomerRegistration {
-
-    /** @var $helper */
-    private $helper;
-
+class DisableAnonymousCustomerRegistration
+{
     private $resources = [
         '/V1/customers::POST' => 'Magento_Customer::customer',
     ];
 
-    public function __construct(Data $helper)
+    public function __construct(private Data $helper)
     {
-        $this->helper = $helper;
     }
 
     /**
@@ -39,6 +35,7 @@ class DisableAnonymousCustomerRegistration {
         if (empty($nodes)) {
             return $nodes;
         }
+
         $disableRegistration = $this->helper->getConfig('customer/disable_registration');
         if ($disableRegistration) {
             foreach ($this->resources as $resource => $ref) {

@@ -9,13 +9,8 @@ use Magento\Framework\Exception\LocalizedException;
 
 class QuoteProductObserver implements ObserverInterface
 {
-
-    /** @var $helper */
-    private $helper;
-
-    public function __construct(Data $helper)
+    public function __construct(private Data $helper)
     {
-        $this->helper = $helper;
     }
 
     /**
