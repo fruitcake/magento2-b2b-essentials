@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="sales_quote_product_add_after">
-        <observer name="fruitcake_b2b_essentials_disable_addtocart" instance="Fruitcake\B2BEssentials\Observer\DisableAddToCart"/>
+        <observer name="fruitcake_b2b_essentials_disable_addtocart" instance="Fruitcake\B2BEssentials\Observer\QuoteProductObserver"/>
     </event>
     <event name="catalog_product_load_after">
         <observer name="fruitcake_b2b_essentials_product_after" instance="Fruitcake\B2BEssentials\Observer\ProductObserver" />
