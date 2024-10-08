@@ -9,6 +9,11 @@
                 <disable_guest_addtocart>0</disable_guest_addtocart>
                 <disable_guest_prices>0</disable_guest_prices>
             </catalog>
+            <emails>
+                <disable_registration>0</disable_registration>
+                <disable_email_changed>0</disable_email_changed>
+                <disable_password_changed>0</disable_password_changed>
+            </emails>
         </fruitcake_b2b_essentials>
     </default>
 </config>

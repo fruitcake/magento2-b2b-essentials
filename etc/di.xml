@@ -12,4 +12,9 @@
                 type="Fruitcake\B2BEssentials\Plugin\DisableAnonymousCustomerRegistration" />
     </type>
 
+    <type name="Magento\Customer\Model\EmailNotification">
+        <plugin name="fruitcake_b2b_essentials_disable_registration_email" sortOrder="1"
+                type="Fruitcake\B2BEssentials\Plugin\DisableCustomerEmailNotification" />
+    </type>
+
 </config>
