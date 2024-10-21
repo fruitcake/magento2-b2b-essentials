@@ -2,6 +2,7 @@
 
 namespace Fruitcake\B2BEssentials\Helper;
 
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\App\Http\Context as HttpContext;
@@ -16,13 +17,18 @@ class Data extends AbstractHelper
     /** @var HttpContext  */
     private $httpContext;
 
+    /** @var Session  */
+    private $customerSession;
+
     public function __construct(
         Context $context,
-        HttpContext $httpContext
+        HttpContext $httpContext,
+        Session $customerSession
     ) {
         parent::__construct($context);
 
         $this->httpContext = $httpContext;
+        $this->customerSession = $customerSession;
     }
 
     /**
@@ -37,6 +43,6 @@ class Data extends AbstractHelper
 
     public function isLoggedIn()
     {
-        return $this->httpContext->getValue(CustomerContext::CONTEXT_AUTH);
+        return $this->httpContext->getValue(CustomerContext::CONTEXT_AUTH) || $this->customerSession->isLoggedIn();
     }
 }
