@@ -6,7 +6,6 @@
 composer require fruitcake/magento2-b2b-essentials
 php bin/magento module:enable Fruitcake_B2BEssentials
 php bin/magento setup:upgrade
-php bin/magento setup:upgrade
 ```
 
 ## Configuration
