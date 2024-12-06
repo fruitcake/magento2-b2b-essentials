@@ -22,6 +22,14 @@
                     <label>Disable Guest Add-to-cart</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="disable_guest_addtocart_backend_only" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Guest Add-to-cart - Only validate back-end</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This requires you to hide the button in the templates, but will prevent products from showing out-of-stock.</comment>
+                    <depends>
+                        <field id="fruitcake_b2b_essentials/catalog/disable_guest_addtocart">1</field>
+                    </depends>
+                </field>
                 <field id="disable_guest_prices" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Disable Guest Prices</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
