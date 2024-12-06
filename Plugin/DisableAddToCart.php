@@ -18,7 +18,11 @@ class DisableAddToCart
      */
     public function aroundIsSalable(Product $subject, callable $proceed)
     {
-        if ($this->helper->getConfig('catalog/disable_guest_addtocart') && !$this->helper->isLoggedIn()) {
+        if (
+            $this->helper->getConfig('catalog/disable_guest_addtocart')
+            && !$this->helper->getConfig('catalog/disable_guest_addtocart_backend_only')
+            && !$this->helper->isLoggedIn()
+        ) {
             return false;
         }
 
