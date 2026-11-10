@@ -34,5 +34,37 @@
     "branch-alias": {
       "dev-master": "1.3-dev"
     }
+  },
+  "require-dev": {
+    "magento/framework": "^103.0",
+    "magento/module-catalog": "^104.0",
+    "magento/module-customer": "^103.0",
+    "magento/module-webapi": "^100.4",
+    "phpunit/phpunit": "^10.5"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Fruitcake\\B2BEssentials\\Test\\": "Test/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://mirror.mage-os.org/",
+      "only": [
+        "magento/*"
+      ]
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "magento/composer-dependency-version-audit-plugin": false,
+      "magento/magento-composer-installer": false,
+      "laminas/laminas-dependency-plugin": false
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "test": "phpunit"
   }
 }
