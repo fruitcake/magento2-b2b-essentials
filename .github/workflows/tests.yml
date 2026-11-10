@@ -28,7 +28,15 @@ jobs:
         run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l
 
       - name: Validate XML files
-        run: find etc -name '*.xml' -print0 | xargs -0 -n1 xmllint --noout
+        run: |
+          find etc -name '*.xml' -print0 | xargs -0 -n1 php -r '
+            libxml_use_internal_errors(true);
+            if (!(new DOMDocument())->load($argv[1])) {
+                foreach (libxml_get_errors() as $e) {
+                    fwrite(STDERR, $argv[1] . ":" . $e->line . ": " . trim($e->message) . PHP_EOL);
+                }
+                exit(1);
+            }'
 
       - uses: ramsey/composer-install@v3
 
