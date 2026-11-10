@@ -40,6 +40,7 @@
                 <field id="disable_registration" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Disable Customer Registration Notification</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Email confirmation links are still sent when account confirmation is required.</comment>
                 </field>
                 <field id="disable_email_changed" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Disable Email Changed Notification</label>

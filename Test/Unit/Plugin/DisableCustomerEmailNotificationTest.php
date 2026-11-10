@@ -37,7 +37,20 @@ class DisableCustomerEmailNotificationTest extends TestCase
         $this->assertTrue($called);
     }
 
-    public function testNewAccountIsSkippedWhenDisabled(): void
+    public static function newAccountProvider(): array
+    {
+        // args after $proceed, expected to send
+        return [
+            'default type' => [[], false],
+            'registered' => [[EmailNotification::NEW_ACCOUNT_EMAIL_REGISTERED], false],
+            'registered no password' => [[EmailNotification::NEW_ACCOUNT_EMAIL_REGISTERED_NO_PASSWORD], false],
+            'confirmed' => [[EmailNotification::NEW_ACCOUNT_EMAIL_CONFIRMED], false],
+            'confirmation link' => [[EmailNotification::NEW_ACCOUNT_EMAIL_CONFIRMATION, 'https://example.com'], true],
+        ];
+    }
+
+    #[DataProvider('newAccountProvider')]
+    public function testNewAccountWhenDisabled(array $args, bool $expectSend): void
     {
         $called = false;
 
@@ -46,10 +59,11 @@ class DisableCustomerEmailNotificationTest extends TestCase
             function () use (&$called) {
                 $called = true;
             },
-            $this->createMock(CustomerInterface::class)
+            $this->createMock(CustomerInterface::class),
+            ...$args
         );
 
-        $this->assertFalse($called);
+        $this->assertSame($expectSend, $called);
     }
 
     public static function credentialsProvider(): array

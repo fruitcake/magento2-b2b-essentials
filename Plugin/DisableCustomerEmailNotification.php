@@ -14,7 +14,12 @@ class DisableCustomerEmailNotification
 
     public function aroundNewAccount(EmailNotification $subject, \Closure $proceed, ...$args)
     {
-        if ($this->helper->getConfig('emails/disable_registration')) {
+        $type = $args[1] ?? EmailNotification::NEW_ACCOUNT_EMAIL_REGISTERED;
+
+        // Always send the confirmation link, otherwise the customer can never activate the account
+        if ($type !== EmailNotification::NEW_ACCOUNT_EMAIL_CONFIRMATION
+            && $this->helper->getConfig('emails/disable_registration')
+        ) {
             return;
         }
 
