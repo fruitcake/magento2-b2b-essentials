@@ -6,6 +6,7 @@ use Fruitcake\B2BEssentials\Helper\Data;
 use Fruitcake\B2BEssentials\Observer\ProductCollectionObserver;
 use Fruitcake\B2BEssentials\Observer\ProductObserver;
 use Fruitcake\B2BEssentials\Observer\QuoteProductObserver;
+use Magento\Authorization\Model\UserContextInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event;
 use Magento\Framework\Event\Observer;
@@ -60,36 +61,47 @@ class ObserversTest extends TestCase
         }
     }
 
-    public function testQuoteObserverBlocksGuest(): void
+    private function quoteObserver(array $config, bool $loggedIn, ?int $userType = null): QuoteProductObserver
     {
-        $this->expectException(LocalizedException::class);
+        $userContext = $this->createMock(UserContextInterface::class);
+        $userContext->method('getUserType')->willReturn($userType);
 
-        (new QuoteProductObserver($this->helper(['catalog/disable_guest_addtocart' => '1'], false)))
-            ->execute(new Observer());
+        return new QuoteProductObserver($this->helper($config, $loggedIn), $userContext);
     }
 
-    public function testQuoteObserverBlocksGuestInBackendOnlyMode(): void
+    public static function quoteBlockedProvider(): array
+    {
+        return [
+            'guest, no user context' => [[], null],
+            'guest, guest api user' => [[], UserContextInterface::USER_TYPE_GUEST],
+            'guest, backend-only mode' => [['catalog/disable_guest_addtocart_backend_only' => '1'], null],
+        ];
+    }
+
+    #[DataProvider('quoteBlockedProvider')]
+    public function testQuoteObserverBlocksGuest(array $config, ?int $userType): void
     {
         $this->expectException(LocalizedException::class);
 
-        (new QuoteProductObserver($this->helper([
-            'catalog/disable_guest_addtocart' => '1',
-            'catalog/disable_guest_addtocart_backend_only' => '1',
-        ], false)))->execute(new Observer());
+        $this->quoteObserver(['catalog/disable_guest_addtocart' => '1'] + $config, false, $userType)
+            ->execute(new Observer());
     }
 
     public static function quoteAllowedProvider(): array
     {
         return [
-            'feature off, guest' => ['0', false],
-            'feature on, logged in' => ['1', true],
+            'feature off, guest' => ['0', false, null],
+            'feature on, session logged in' => ['1', true, null],
+            'feature on, api customer' => ['1', false, UserContextInterface::USER_TYPE_CUSTOMER],
+            'feature on, api admin' => ['1', false, UserContextInterface::USER_TYPE_ADMIN],
+            'feature on, api integration' => ['1', false, UserContextInterface::USER_TYPE_INTEGRATION],
         ];
     }
 
     #[DataProvider('quoteAllowedProvider')]
-    public function testQuoteObserverAllows(string $config, bool $loggedIn): void
+    public function testQuoteObserverAllows(string $config, bool $loggedIn, ?int $userType): void
     {
-        (new QuoteProductObserver($this->helper(['catalog/disable_guest_addtocart' => $config], $loggedIn)))
+        $this->quoteObserver(['catalog/disable_guest_addtocart' => $config], $loggedIn, $userType)
             ->execute(new Observer());
 
         $this->addToAssertionCount(1);
