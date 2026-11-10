@@ -14,10 +14,16 @@ class DisableRegistration
     /**
      * Check whether customers registration is allowed
      *
+     * @param Registration $subject
+     * @param bool $result
      * @return bool
      */
-    public function afterIsAllowed(Registration $subject)
+    public function afterIsAllowed(Registration $subject, $result)
     {
-        return ! $this->helper->getConfig('customer/disable_registration');
+        if (! $this->helper->getConfig('customer/disable_registration')) {
+            return $result;
+        }
+
+        return false;
     }
 }
